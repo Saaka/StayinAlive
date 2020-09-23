@@ -28,5 +28,8 @@ namespace StayinAlive.Alive
             else
                 return BadRequest(response.ErrorMessage);
         }
+
+        [HttpGet("health-check")]
+        public IActionResult HealthCheck() => Ok("OK");
     }
 }
