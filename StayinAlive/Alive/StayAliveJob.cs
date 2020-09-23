@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Linq;
+using Microsoft.Extensions.Configuration;
 using RestSharp;
 
 namespace StayinAlive.Alive
@@ -18,11 +19,20 @@ namespace StayinAlive.Alive
 
         public void Run()
         {
-            var url = configuration["Services:Url"];
-            var restRequest = new RestRequest(url, Method.GET);
+            var urls = configuration
+                .GetSection("Services:Urls")
+                .AsEnumerable()
+                .Where(x=> x.Value != null)
+                .Select(x=> x.Value)
+                .ToList();
+            
+            foreach (var url in urls)
+            {
+                var restRequest = new RestRequest(url, Method.GET);
 
-            var response = restClient
-                .Execute(restRequest);
+                var response = restClient
+                    .Execute(restRequest);
+            }
         }
     }
 }
