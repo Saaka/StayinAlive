@@ -44,6 +44,9 @@ msbuild.wrn
 PublishProfiles/
 /wwwroot/dist/
 
+# Jetbrains Rider
+.idea/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
